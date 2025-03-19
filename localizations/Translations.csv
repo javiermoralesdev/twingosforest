@@ -1,0 +1,29 @@
+﻿id,en,es
+mm_play,Play,Jugar
+mm_settings,Settings,Opciones
+mm_quit,Quit,Salir
+mm_howto,How to play,Cómo jugar
+mm_credits,Credits,Créditos
+mm_hscore,High score: {hscore},Máxima puntuación: {hscore}
+pause,Pause,Pausa
+game_over,Game Over,Fin de partida
+pause_resume,Resume,Reanudar
+main_menu,Main menu,Menú principal
+sett_music,Music volume,Volumen música
+sett_sounds,Sounds volume,Volumen sonidos
+sett_fs,Fullscreen,Pantalla completa
+howto_shoot,Right click to shoot carrots,Pulsa clic derecho para disparar zanahorias
+howto_move,Left to move,Pulsa clic izquierdo para moverte
+howto_plant,Middle click to plant a tree (trees can't be planted too nearby between each other),Pulsa clic central para plantar un árbol (los árboles no pueden estar demasiado cerca entre sí)
+howto_tree,"Once the trees are fully grown up, you can get their fruits","Cuando los árboles hayan crecido completamente, podrás recoger sus frutos"
+howto_skeletons,The skeletons will try to destroy your trees,Los esqueletos intentarán destruir los árboles
+howto_ghosts,The ghosts will try to kill you,Los fantasmas intentarán matarte
+intro1,This is Twingo. He lives in a forest,Este es Twingo. Vive en un bosque
+intro2,Twingo likes planting trees and eat their berries,A Twingo le gusta plantar plantar árboles y comer de sus bayas
+intro3,But...,Pero...
+intro4,"When night falls, skeletons will appear and they will try to eat Twingo's trees",Cuando se hace de noche. Surgen esqueletos tratando de comerse los árboles de Twingo
+intro5,And not just that...,Y no sólo eso...
+intro6,Ghosts like to eat rabbit too,A los fantasmas les gusta demasiado comer conejo
+intro7,¡Luckily he has some carrots to defend themselves!,¡Suerte que tiene sus zanahorias para defenderse!
+retry,Retry,Reintentar
+score,Score: {score},Puntuación: {score}

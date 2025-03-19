@@ -1,0 +1,66 @@
+[gd_scene load_steps=7 format=3 uid="uid://2rq08qj04x0c"]
+
+[ext_resource type="Script" uid="uid://olhqi0d5o7y2" path="res://scripts/ghost.gd" id="1_l5lq6"]
+[ext_resource type="Texture2D" uid="uid://badkvt3p7joaw" path="res://sprites/ghost-25x35.png" id="1_t76o2"]
+
+[sub_resource type="Animation" id="Animation_bbnym"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_l5lq6"]
+resource_name = "move"
+length = 0.90001
+loop_mode = 2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GhostSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_veat2"]
+_data = {
+&"RESET": SubResource("Animation_bbnym"),
+&"move": SubResource("Animation_l5lq6")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5mfnq"]
+size = Vector2(11, 29)
+
+[node name="Ghost" type="Area2D" groups=["ghosts"]]
+script = ExtResource("1_l5lq6")
+
+[node name="GhostSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_t76o2")
+hframes = 5
+vframes = 2
+
+[node name="GhostAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_veat2")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -0.5)
+shape = SubResource("RectangleShape2D_5mfnq")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

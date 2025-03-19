@@ -1,0 +1,101 @@
+[gd_scene load_steps=9 format=3 uid="uid://dl5582pekeqq1"]
+
+[ext_resource type="Texture2D" uid="uid://cs3d4wlugmgp8" path="res://sprites/skeleton-36x48.png" id="1_pbvs3"]
+[ext_resource type="Script" uid="uid://lu8uevkbgfw7" path="res://scripts/skeleton.gd" id="1_txkty"]
+
+[sub_resource type="Animation" id="Animation_txkty"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkeletonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_ivqcw"]
+resource_name = "die"
+length = 0.80001
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkeletonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.60001, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 18, 19]
+}
+
+[sub_resource type="Animation" id="Animation_bnirc"]
+resource_name = "idle"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkeletonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [11]
+}
+
+[sub_resource type="Animation" id="Animation_pbvs3"]
+resource_name = "move"
+length = 1.00001
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkeletonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ivqcw"]
+_data = {
+&"RESET": SubResource("Animation_txkty"),
+&"die": SubResource("Animation_ivqcw"),
+&"idle": SubResource("Animation_bnirc"),
+&"move": SubResource("Animation_pbvs3")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbvs3"]
+size = Vector2(12, 44)
+
+[node name="Skeleton" type="Area2D" groups=["skeletons"]]
+script = ExtResource("1_txkty")
+
+[node name="SkeletonSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_pbvs3")
+hframes = 5
+vframes = 4
+
+[node name="SkeletonAnim" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ivqcw")
+}
+autoplay = "move"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, -1)
+shape = SubResource("RectangleShape2D_pbvs3")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
