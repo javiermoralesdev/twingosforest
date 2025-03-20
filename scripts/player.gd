@@ -10,11 +10,11 @@ var pause_hover = false
 func _physics_process(_delta: float) -> void:
 	%ScoreLabel.text = str(score)
 	if Global.paused:
+		%TargetImage.visible = false
 		return
 	if Input.is_action_just_pressed("move") and not pause_hover:
 		target = get_global_mouse_position()
 		%TargetImage.position = target
-		%TargetImage.visible = true
 	if position.distance_to(target) > 3:
 		go_to_target()
 	else:
@@ -38,13 +38,14 @@ func plant_tree():
 		return
 	var tree_instance = tree_prefab.instantiate()
 	tree_instance.position = position
-	get_tree().root.add_child(tree_instance)
+	add_sibling(tree_instance)
 
 func go_to_target():
 	var direction = Vector2(
 		target.x - position.x,
 		target.y - position.y
 	).normalized()
+	%TargetImage.visible = true
 	$AnimationPlayer.play("run")
 	$PlayerSprite.flip_h = direction.x < 0
 	velocity = direction * SPEED
@@ -76,7 +77,6 @@ func pause():
 	%PauseScreen.appear()
 	%PauseButton.visible = false
 	%ScoreLabel.visible = false
-	#Engine.time_scale = 0
 
 
 func _on_pause_button_mouse_entered() -> void:

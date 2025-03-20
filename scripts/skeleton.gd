@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 		target.position.x - position.x,
 		target.position.y - position.y
 	).normalized()
+	$SkeletonSprite.flip_h = direction.x < 0
 	if position.distance_to(target.position) > 3:
 		position += direction * SPEED * delta
 

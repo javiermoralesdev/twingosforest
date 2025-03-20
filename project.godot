@@ -33,6 +33,7 @@ trees=""
 skeletons=""
 carrots=""
 ghosts=""
+player=""
 
 [input]
 

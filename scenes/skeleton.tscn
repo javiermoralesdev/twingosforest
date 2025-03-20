@@ -81,6 +81,7 @@ _data = {
 size = Vector2(12, 44)
 
 [node name="Skeleton" type="Area2D" groups=["skeletons"]]
+z_index = 5
 script = ExtResource("1_txkty")
 
 [node name="SkeletonSprite" type="Sprite2D" parent="."]

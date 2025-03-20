@@ -17,20 +17,20 @@ func _on_enemy_timer_timeout() -> void:
 	spawn_skeleton()
 
 func get_coord_in_bounds() -> Vector2:
-	var x = randi_range(referenceLeft.position.x, referenceRight.position.x)
-	var y = randi_range(referenceUp.position.y, referenceDown.position.y)
+	var x = randi_range(referenceLeft.position.x as int, referenceRight.position.x as int)
+	var y = randi_range(referenceUp.position.y as int, referenceDown.position.y as int)
 	return Vector2(x, y)
 
 func get_valid_coord() -> Vector2:
-	var position = get_coord_in_bounds()
-	while position.distance_to(%Player.position) < 300:
-		position = get_coord_in_bounds()
-	return position
+	var pos = get_coord_in_bounds()
+	while pos.distance_to(%Player.position) < 300:
+		pos = get_coord_in_bounds()
+	return pos
 
 func spawn_enemy(enemy: PackedScene):
-	var position = get_valid_coord()
+	var pos = get_valid_coord()
 	var instance = enemy.instantiate()
-	instance.position = position
+	instance.position = pos
 	add_child(instance)
 
 func spawn_skeleton():
