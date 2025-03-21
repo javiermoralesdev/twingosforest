@@ -1,15 +1,19 @@
-[gd_scene load_steps=26 format=4 uid="uid://d1uhmq4a7gmn5"]
+[gd_scene load_steps=30 format=4 uid="uid://d1uhmq4a7gmn5"]
 
 [ext_resource type="Script" uid="uid://wr1b5l0kmme5" path="res://scripts/game.gd" id="1_kvpfn"]
 [ext_resource type="PackedScene" uid="uid://hcu1e0y1wxqs" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://dbt6veh7km7oi" path="res://scenes/target_image.tscn" id="3_lnu2h"]
+[ext_resource type="AudioStream" uid="uid://cjgfolnwscjou" path="res://sounds/shoot.wav" id="4_dinhu"]
 [ext_resource type="Texture2D" uid="uid://cyr7sm48u5ubp" path="res://sprites/Grass Texture 2.jpg" id="4_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://bhlf1oe2g6quu" path="res://sprites/AppleTree_allSeasons.png" id="5_iywne"]
+[ext_resource type="AudioStream" uid="uid://24e4heh5r0qi" path="res://music/game.ogg" id="5_trtic"]
 [ext_resource type="Script" uid="uid://bilvf2a1yyebd" path="res://scripts/pause_screen.gd" id="7_gee14"]
 [ext_resource type="Texture2D" uid="uid://denre21ok548n" path="res://sprites/pause.png" id="7_u5sy4"]
 [ext_resource type="FontFile" uid="uid://ryttacgty5xx" path="res://fonts/bitmap.ttf" id="8_gee14"]
 [ext_resource type="Theme" uid="uid://briylatjpq616" path="res://styles/button_theme.tres" id="9_0tnpc"]
 [ext_resource type="Script" uid="uid://dfcobno0ni338" path="res://scripts/game_over_screen.gd" id="10_vtaks"]
+[ext_resource type="AudioStream" uid="uid://ctrwa7bme4bb2" path="res://sounds/wrong.wav" id="11_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://cbbmkg1qqoiii" path="res://scenes/generic_button.tscn" id="11_kvuet"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lbhrr"]
 texture = ExtResource("4_lbhrr")
@@ -160,11 +164,24 @@ referenceDown = NodePath("ReferenceDownRight")
 unique_name_in_owner = true
 z_index = 5
 position = Vector2(1781, 1286)
-metadata/_edit_group_ = true
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-2, -7)
 zoom = Vector2(2.5, 2.5)
+
+[node name="WrongPlayer" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("11_kvpfn")
+bus = &"Sound"
+
+[node name="ShootPlayer" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("4_dinhu")
+bus = &"Sound"
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="Player"]
+unique_name_in_owner = true
+stream = ExtResource("5_trtic")
+autoplay = true
+bus = &"Music"
 
 [node name="TargetImage" parent="." instance=ExtResource("3_lnu2h")]
 unique_name_in_owner = true
@@ -199,7 +216,6 @@ icon = ExtResource("7_u5sy4")
 
 [node name="PauseScreen" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
-visible = false
 z_as_relative = false
 y_sort_enabled = true
 anchors_preset = 15
@@ -232,49 +248,35 @@ libraries = {
 &"": SubResource("AnimationLibrary_kvpfn")
 }
 
-[node name="ResumeButton" type="Button" parent="CanvasLayer/PauseScreen"]
+[node name="ResumeButton" parent="CanvasLayer/PauseScreen" instance=ExtResource("11_kvuet")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -146.0
-offset_top = -33.5
-offset_right = 146.0
-offset_bottom = 33.5
+offset_left = -122.5
+offset_top = -160.0
+offset_right = 122.5
+offset_bottom = -117.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("9_0tnpc")
-theme_override_fonts/font = ExtResource("8_gee14")
-theme_override_font_sizes/font_size = 25
 text = "pause_resume"
 
-[node name="MainMenuButton" type="Button" parent="CanvasLayer/PauseScreen"]
+[node name="MainMenuButton" parent="CanvasLayer/PauseScreen" instance=ExtResource("11_kvuet")]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -146.0
-offset_top = 77.0
-offset_right = 146.0
-offset_bottom = 144.0
+offset_left = -122.5
+offset_top = -90.0
+offset_right = 122.5
+offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("9_0tnpc")
-theme_override_fonts/font = ExtResource("8_gee14")
-theme_override_font_sizes/font_size = 25
 text = "main_menu"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/PauseScreen"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/PauseScreen/HBoxContainer"]
-layout_mode = 2
 
 [node name="GameOverScreen" type="ColorRect" parent="CanvasLayer"]
 unique_name_in_owner = true
@@ -385,5 +387,6 @@ autostart = true
 [connection signal="mouse_exited" from="CanvasLayer/PauseButton" to="Player" method="_on_pause_button_mouse_exited"]
 [connection signal="pressed" from="CanvasLayer/PauseButton" to="Player" method="_on_pause_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/PauseScreen/ResumeButton" to="CanvasLayer/PauseScreen" method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/PauseScreen/MainMenuButton" to="CanvasLayer/PauseScreen" method="main_menu"]
 [connection signal="pressed" from="CanvasLayer/GameOverScreen/RetryButton" to="CanvasLayer/GameOverScreen" method="_on_retry_button_pressed"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]

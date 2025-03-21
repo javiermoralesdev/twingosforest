@@ -4,9 +4,6 @@ extends Area2D
 const SPEED = 100
 var health = 2
 
-func _ready():
-	pass
-
 func _process(delta: float):
 	if Global.paused:
 		return
@@ -28,10 +25,15 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("carrots"):
 		health -= 1
 		if health <= 0:
-			queue_free()
+			$DiePlayer.play()
+			$CollisionShape2D.set_deferred("disabled", true)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		get_node("/root/Game/CanvasLayer/GameOverScreen").appear()
 		Global.paused = true
+
+
+func _on_die_player_finished() -> void:
+	queue_free()

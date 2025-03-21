@@ -27,3 +27,5 @@ intro6,Ghosts like to eat rabbit too,A los fantasmas les gusta demasiado comer c
 intro7,¡Luckily he has some carrots to defend themselves!,¡Suerte que tiene sus zanahorias para defenderse!
 retry,Retry,Reintentar
 score,Score: {score},Puntuación: {score}
+mm_back,Back,Atrás
+intro_skip,Press left click to continue the story. Press right click to skip,Pulsa clic izquierdo para continuar la historia. Pulsa clic derecho para saltártela

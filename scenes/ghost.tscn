@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://2rq08qj04x0c"]
+[gd_scene load_steps=8 format=3 uid="uid://2rq08qj04x0c"]
 
 [ext_resource type="Script" uid="uid://olhqi0d5o7y2" path="res://scripts/ghost.gd" id="1_l5lq6"]
 [ext_resource type="Texture2D" uid="uid://badkvt3p7joaw" path="res://sprites/ghost-25x35.png" id="1_t76o2"]
+[ext_resource type="AudioStream" uid="uid://d1qnclt4py2ho" path="res://sounds/death.wav" id="3_bbnym"]
 
 [sub_resource type="Animation" id="Animation_bbnym"]
 length = 0.001
@@ -64,5 +65,10 @@ autoplay = "move"
 position = Vector2(1.5, -0.5)
 shape = SubResource("RectangleShape2D_5mfnq")
 
+[node name="DiePlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_bbnym")
+bus = &"Sound"
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="DiePlayer" to="." method="_on_die_player_finished"]

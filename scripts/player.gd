@@ -35,6 +35,7 @@ func _physics_process(_delta: float) -> void:
 
 func plant_tree():
 	if are_trees_too_close():
+		$WrongPlayer.play()
 		return
 	var tree_instance = tree_prefab.instantiate()
 	tree_instance.position = position
@@ -58,6 +59,7 @@ func shoot():
 	var angle = atan2(lookDir.y, lookDir.x)
 	carrot_instance.rotation = angle
 	get_tree().root.add_child(carrot_instance)
+	$ShootPlayer.play()
 
 func are_trees_too_close() -> bool:
 	var trees = get_tree().get_nodes_in_group("trees")
@@ -73,6 +75,7 @@ func _on_pause_button_pressed() -> void:
 func pause():
 	if Global.paused:
 		return
+	%MusicPlayer.stream_paused = true
 	Global.paused = true
 	%PauseScreen.appear()
 	%PauseButton.visible = false

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cbbmkg1qqoiii"]
+
+[ext_resource type="Theme" uid="uid://briylatjpq616" path="res://styles/button_theme.tres" id="1_eoch2"]
+[ext_resource type="FontFile" uid="uid://ryttacgty5xx" path="res://fonts/bitmap.ttf" id="2_oxtry"]
+[ext_resource type="AudioStream" uid="uid://ejygspfex2xq" path="res://sounds/click.wav" id="3_gnty3"]
+[ext_resource type="Script" uid="uid://qps0i3q6x1jl" path="res://scripts/generic_button.gd" id="3_oxtry"]
+[ext_resource type="AudioStream" uid="uid://belndp8lgs7xs" path="res://sounds/hover.wav" id="4_ep5nn"]
+
+[node name="GenericButton" type="Button"]
+offset_right = 188.0
+offset_bottom = 43.0
+theme = ExtResource("1_eoch2")
+theme_override_fonts/font = ExtResource("2_oxtry")
+theme_override_font_sizes/font_size = 20
+text = "Button"
+script = ExtResource("3_oxtry")
+
+[node name="ClickPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gnty3")
+bus = &"Sound"
+
+[node name="HoverPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ep5nn")
+bus = &"Sound"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="pressed" from="." to="." method="_on_pressed"]

@@ -1,0 +1,81 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2wbxq2og7nmb"]
+
+[ext_resource type="Script" uid="uid://c8lwcde1vqnt2" path="res://scripts/tutorial.gd" id="1_4kmhl"]
+[ext_resource type="Texture2D" uid="uid://b40ry6f3rc7qi" path="res://images/background.png" id="1_8ho6b"]
+[ext_resource type="FontFile" uid="uid://ryttacgty5xx" path="res://fonts/bitmap.ttf" id="2_ph3nu"]
+[ext_resource type="PackedScene" uid="uid://cbbmkg1qqoiii" path="res://scenes/generic_button.tscn" id="4_4kmhl"]
+[ext_resource type="AudioStream" uid="uid://by1mhd46m6j6q" path="res://music/tutorial.ogg" id="5_cq4me"]
+
+[node name="Tutorial" type="CanvasLayer"]
+script = ExtResource("1_4kmhl")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8ho6b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 206.0
+
+[node name="Move" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_move"
+autowrap_mode = 3
+
+[node name="Shoot" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_shoot"
+autowrap_mode = 3
+
+[node name="Plant" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_plant"
+autowrap_mode = 3
+
+[node name="Tree" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_tree"
+autowrap_mode = 3
+
+[node name="Skeletons" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_skeletons"
+autowrap_mode = 3
+
+[node name="Ghosts" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ph3nu")
+theme_override_font_sizes/font_size = 35
+text = "howto_ghosts"
+autowrap_mode = 3
+
+[node name="BackButton" parent="." instance=ExtResource("4_4kmhl")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 48.0
+offset_top = -97.0
+offset_right = 261.0
+offset_bottom = -54.0
+grow_vertical = 0
+text = "mm_back"
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cq4me")
+autoplay = true
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

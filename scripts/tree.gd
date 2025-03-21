@@ -5,6 +5,7 @@ enum TreeState {
 	GROW = 3,
 	FRUITS = 4
 }
+var dying = false
 
 var state = TreeState.BASE
 
@@ -35,8 +36,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 
 func _on_attack_timer_timeout() -> void:
+	$FallPlayer.play()
 	match state:
-		TreeState.BASE: queue_free()
+		TreeState.BASE: dying = true
 		TreeState.GROW: state = TreeState.BASE
 		TreeState.FRUITS: state = TreeState.GROW
 
@@ -54,3 +56,8 @@ func _on_area_exited(area: Area2D) -> void:
 		if not has_skeletons():
 			$AttackTimer.stop()
 			$GrowTimer.paused = false
+
+
+func _on_fall_player_finished() -> void:
+	if dying:
+		queue_free()

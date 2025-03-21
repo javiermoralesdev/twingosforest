@@ -13,7 +13,12 @@ func _on_button_pressed() -> void:
 	%ScoreLabel.visible = true
 	$PauseAnim.play("hide")
 	Global.paused = false
-	Engine.time_scale = 1
+	%MusicPlayer.stream_paused = false
+
+func main_menu():
+	Transition.transition()
+	await Transition.on_transition_finished
+	get_tree().change_scene_to_file(Global.menu_scene)
 
 func _on_anim_finished(anim_name: String):
 	match anim_name:
