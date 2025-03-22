@@ -7,7 +7,8 @@ func appear():
 	$ScoreText.text = tr("score").format({"score": %Player.score})
 	%ScoreLabel.visible = false
 	%PauseButton.visible = false
-	$HighscoreText.text = tr("mm_hscore").format({"hscore": Global.high_score})
+	%MusicPlayer.stop()
+	$HighscoreText.text = tr("mm_hscore").format({"hscore": Global.get_high_score()})
 
 
 

@@ -1,10 +1,66 @@
-[gd_scene load_steps=2 format=3 uid="uid://4lb6d7sowyga"]
+[gd_scene load_steps=6 format=3 uid="uid://4lb6d7sowyga"]
 
 [ext_resource type="Texture2D" uid="uid://b40ry6f3rc7qi" path="res://images/background.png" id="1_5p8wc"]
+[ext_resource type="Script" uid="uid://bb604daf0hd54" path="res://scripts/settings.gd" id="1_f4mfi"]
+[ext_resource type="AudioStream" uid="uid://dev01o68dwaly" path="res://music/settings.ogg" id="3_es4n0"]
+[ext_resource type="FontFile" uid="uid://ryttacgty5xx" path="res://fonts/bitmap.ttf" id="3_gis3k"]
+[ext_resource type="PackedScene" uid="uid://cbbmkg1qqoiii" path="res://scenes/generic_button.tscn" id="4_gis3k"]
 
 [node name="Settings" type="CanvasLayer"]
+script = ExtResource("1_f4mfi")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Background" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_5p8wc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 1280.0
+offset_bottom = 68.0
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gis3k")
+theme_override_font_sizes/font_size = 25
+text = "sett_music"
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SoundsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gis3k")
+theme_override_font_sizes/font_size = 25
+text = "sett_sounds"
+
+[node name="SoundSlider" type="HSlider" parent="VBoxContainer"]
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="FullscreenCheck" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_gis3k")
+theme_override_font_sizes/font_size = 25
+text = "sett_fs"
+
+[node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_es4n0")
+autoplay = true
+bus = &"Music"
+
+[node name="BackButton" parent="." instance=ExtResource("4_gis3k")]
+offset_left = 63.0
+offset_top = 612.0
+offset_right = 251.0
+offset_bottom = 655.0
+text = "mm_back"
+
+[connection signal="value_changed" from="VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="toggled" from="VBoxContainer/FullscreenCheck" to="." method="_on_fullscreen_check_toggled"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

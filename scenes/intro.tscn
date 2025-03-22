@@ -290,3 +290,4 @@ vframes = 2
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_bu1yb")
 autoplay = true
+bus = &"Music"

@@ -4,6 +4,7 @@ extends Area2D
 const SPEED = 150
 var target: Node2D
 var health = 2
+var die = false
 
 func find_target():
 	var trees = get_tree().get_nodes_in_group("trees")
@@ -26,7 +27,7 @@ func _process(delta: float) -> void:
 		target.position.y - position.y
 	).normalized()
 	$SkeletonSprite.flip_h = direction.x < 0
-	if position.distance_to(target.position) > 3:
+	if position.distance_to(target.position) > 3 and not die:
 		position += direction * SPEED * delta
 
 
@@ -35,6 +36,8 @@ func _on_area_entered(area: Area2D) -> void:
 		health -= 1
 		if health <= 0:
 			$CollisionShape2D.set_deferred("disabled", true)
+			$SkeletonSprite.modulate = Color(1, 0, 0, 1)
+			$SkeletonAnim.pause()
 			$DiePlayer.play()
 
 

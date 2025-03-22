@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7ll3pbo26e7g"]
+[gd_scene load_steps=8 format=3 uid="uid://b7ll3pbo26e7g"]
 
 [ext_resource type="Texture2D" uid="uid://b40ry6f3rc7qi" path="res://images/background.png" id="1_l6cm7"]
 [ext_resource type="Script" uid="uid://dkmsubqvocf7" path="res://scripts/main_menu.gd" id="1_wu84c"]
 [ext_resource type="FontFile" uid="uid://ryttacgty5xx" path="res://fonts/bitmap.ttf" id="2_ekxnf"]
 [ext_resource type="PackedScene" uid="uid://cbbmkg1qqoiii" path="res://scenes/generic_button.tscn" id="4_wu84c"]
 [ext_resource type="AudioStream" uid="uid://dpb1q1jf25ac2" path="res://music/menu.ogg" id="5_8ln24"]
+[ext_resource type="Texture2D" uid="uid://m0j6g8cgrn8s" path="res://images/banner.png" id="6_oa1go"]
+[ext_resource type="Script" uid="uid://djgeaeeuvvvrw" path="res://scripts/splash.gd" id="7_tbmy8"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_wu84c")
@@ -108,6 +110,14 @@ text = "mm_quit"
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_8ln24")
 autoplay = true
+bus = &"Music"
+
+[node name="Splash" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("6_oa1go")
+script = ExtResource("7_tbmy8")
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="TutorialButton" to="." method="_on_tutorial_button_pressed"]

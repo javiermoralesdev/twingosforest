@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 func _ready() -> void:
-	$ScoreLabel.text = tr("mm_hscore").format({"hscore": Global.high_score})
+	$ScoreLabel.text = tr("mm_hscore").format({"hscore": Global.get_high_score()})
 
 
 func go_to_level(level_name: String):

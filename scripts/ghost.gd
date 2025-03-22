@@ -3,6 +3,7 @@ extends Area2D
 @onready var target = get_tree().get_first_node_in_group("player")
 const SPEED = 100
 var health = 2
+var die = false
 
 func _process(delta: float):
 	if Global.paused:
@@ -10,7 +11,7 @@ func _process(delta: float):
 	if target == null:
 		target = get_tree().get_first_node_in_group("player")
 		return
-	if position.distance_to(target.position) > 3:
+	if position.distance_to(target.position) > 3 and not die:
 		var direction = Vector2(
 			target.position.x - position.x,
 			target.position.y - position.y
@@ -26,6 +27,8 @@ func _on_area_entered(area: Area2D) -> void:
 		health -= 1
 		if health <= 0:
 			$DiePlayer.play()
+			die = true
+			$GhostSprite.modulate = Color(1, 0, 0, 1)
 			$CollisionShape2D.set_deferred("disabled", true)
 
 
