@@ -4,6 +4,8 @@ extends CanvasLayer
 @onready var sound_id = AudioServer.get_bus_index("Sound")
 
 func _ready() -> void:
+	if OS.get_name() == "Web":
+		$VBoxContainer/FullscreenCheck.queue_free()
 	$VBoxContainer/MusicSlider.value = Global.settings_data.music_volume
 	$VBoxContainer/SoundSlider.value = Global.settings_data.sounds_volume
 	$VBoxContainer/FullscreenCheck.button_pressed = Global.settings_data.fullscreen

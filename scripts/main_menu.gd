@@ -2,6 +2,9 @@ extends CanvasLayer
 
 func _ready() -> void:
 	$ScoreLabel.text = tr("mm_hscore").format({"hscore": Global.get_high_score()})
+	if OS.get_name() == "Web":
+		$QuitButton.queue_free()
+		
 
 
 func go_to_level(level_name: String):
